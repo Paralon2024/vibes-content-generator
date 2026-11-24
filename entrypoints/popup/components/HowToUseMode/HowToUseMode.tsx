@@ -63,8 +63,8 @@ export function HowToUseMode() {
           <div className="step-badge">2</div>
           <div className="step-content">
             <p className="step-text">
-              Convert your script to the structured <code>script.json</code>. Si no lo tienes,
-              copia y usa este prompt para generarlo con IA:
+              Convert your script to the structured <code>script.json</code>. If you don't have one yet,
+              copy the prompt below and use an AI tool to generate it:
             </p>
             <div className="prompt-wrapper">
               <div className="prompt-container">
@@ -150,7 +150,7 @@ export function HowToUseMode() {
                   <ul>
                     <li>✅ More stable (0 credits).</li>
                     <li>
-                      ⚙️ Enable <strong>Agent mode</strong> and select <strong>x2</strong> en
+                      ⚙️ Enable <strong>Agent mode</strong> and select <strong>x2</strong>
                       on the website before generating:
                     </li>
                   </ul>
@@ -165,9 +165,8 @@ export function HowToUseMode() {
 
             <div className="sub-step-info" style={{ marginTop: '8px' }}>
               <p className="step-text">
-                In the <strong>Project</strong>, tab, select your folder, make sure you are in
-                <strong>Images</strong> mode, then click <strong>Generate images</strong>
-                :
+                In the <strong>Project</strong> tab, select your folder, make sure you are in
+                <strong>Images</strong> mode, then click <strong>Generate images</strong>:
               </p>
               <img
                 src="/ext_image_project.png"
@@ -240,7 +239,7 @@ export function HowToUseMode() {
 
             <div className="sub-step-info" style={{ marginTop: '8px' }}>
               <p className="step-text">
-                The extension will create the subfolder <code>videos</code>, to complete the final folder structure:
+                The extension will create a <code>videos</code> subfolder, completing the folder structure:
               </p>
               <div className="folder-structure" style={{ marginTop: '4px' }}>
                 📁 My-AI-Project/
