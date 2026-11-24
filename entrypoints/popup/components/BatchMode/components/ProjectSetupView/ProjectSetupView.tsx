@@ -40,7 +40,7 @@ export function ProjectSetupView({
   return (
     <div className="main">
       <button className="folder-select-btn" onClick={onSelectFolder} disabled={loading}>
-        {projectHandle ? `📁 ${projectName}` : '📂 Seleccionar carpeta de proyecto'}
+        {projectHandle ? `📁 ${projectName}` : '📂 Select project folder'}
       </button>
 
       {projectHandle && (
@@ -49,7 +49,7 @@ export function ProjectSetupView({
             className={batchType === BatchModes.Image ? 'active' : ''}
             onClick={() => onSwitchBatchType(BatchModes.Image)}
           >
-            🖼 Imágenes
+            🖼 Images
           </button>
           <button
             className={batchType === BatchModes.Video ? 'active' : ''}
@@ -63,7 +63,7 @@ export function ProjectSetupView({
       {batchScenes.length > 0 && (
         <>
           <p className="scenes-count">
-            {pendingScenes.length} pendientes · {completedScenes.size} ya generadas
+            {pendingScenes.length} pending · {completedScenes.size} already generated
           </p>
           <div className="scene-grid">
             {batchScenes.map((s) => (
@@ -80,12 +80,12 @@ export function ProjectSetupView({
             <button className="generate-btn" onClick={onStartBatch} disabled={loading}>
               {loading
                 ? batchType === BatchModes.Image
-                  ? 'Iniciando...'
-                  : 'Cargando imágenes...'
-                : `Generar ${batchType === BatchModes.Image ? 'imágenes' : 'videos'} (${pendingScenes.length} pendientes)`}
+                  ? 'Starting...'
+                  : 'Loading images...'
+                : `Generate ${batchType === BatchModes.Image ? 'images' : 'videos'} (${pendingScenes.length} pending)`}
             </button>
           ) : (
-            <p className="status status-success">Todas las escenas ya están generadas ✓</p>
+            <p className="status status-success">All scenes have already been generated ✓</p>
           )}
         </>
       )}
@@ -93,8 +93,8 @@ export function ProjectSetupView({
       {batchStatus && !batchStatus.active && batchStatus.totalScenes > 0 && (
         <div className="last-batch">
           <p className="last-batch__label">
-            {batchStatus.mode === BatchModes.Image ? '🖼' : '🎬'} Último: {batchStatus.projectName} ·{' '}
-            {doneCount}/{batchStatus.totalScenes} completados
+            {batchStatus.mode === BatchModes.Image ? '🖼' : '🎬'} Last run: {batchStatus.projectName} ·{' '}
+            {doneCount}/{batchStatus.totalScenes} completed
           </p>
           <StatusSceneGrid
             sceneNumbers={batchStatus.sceneNumbers}
