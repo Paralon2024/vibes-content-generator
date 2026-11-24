@@ -11,10 +11,12 @@ export default defineContentScript({
     '*://*.flow.google.com/*',
   ],
   main() {
-    browser.runtime.onMessage.addListener((message: ExtensionMessage) => {
+    browser.runtime.onMessage.addListener(
+      (message: ExtensionMessage, _sender, sendResponse) => {
       switch (message.action) {
         case Actions.PingContentScript:
-          return { ready: true, site: 'flow' };
+            sendResponse({ ready: true, site: 'flow' });
+            return;
 
         case Actions.StopBatch:
           setAborted(true);
@@ -34,6 +36,7 @@ export default defineContentScript({
         default:
           return;
       }
-    });
+      }
+    );
   },
 });
