@@ -14,11 +14,50 @@ import {
 } from './projectFiles';
 import type { SceneData } from './BatchMode.types';
 
-// Only vibes.ai stamps a watermark that needs blurring (see mediaDownload.ts)
-// — default to Flow when the tab's URL is missing/unrecognized so we never
-// blur a Flow-generated image by mistake.
-function detectSite(tabUrl: string | undefined): BatchSite {
-  return tabUrl?.includes('vibes.ai') ? BatchSites.Vibes : BatchSites.Flow;
+function detectSite(tabUrl: string | undefined): BatchSite | null {
+  if (!tabUrl) return null;
+
+  try {
+    const hostname = new URL(tabUrl).hostname.toLowerCase();
+
+    if (hostname === 'vibes.ai' || hostname.endsWith('.vibes.ai')) {
+      return BatchSites.Vibes;
+    }
+
+    if (
+      hostname === 'flow.google.com' ||
+      hostname.endsWith('.flow.google.com') ||
+      hostname === 'labs.google' ||
+      hostname.endsWith('.labs.google')
+    ) {
+      return BatchSites.Flow;
+    }
+  } catch {
+    return null;
+  }
+
+  return null;
+}
+
+function wait(milliseconds: number) {
+  return new Promise((resolve) => setTimeout(resolve, milliseconds));
+}
+
+async function waitForContentScript(tabId: number): Promise<boolean> {
+  for (let attempt = 0; attempt < 10; attempt += 1) {
+    try {
+      const response = await browser.tabs.sendMessage(tabId, {
+        action: Actions.PingContentScript,
+      });
+      if (response?.ready === true) return true;
+    } catch {
+      // The content script may still be starting, or the page may need refresh.
+    }
+
+    if (attempt < 9) await wait(500);
+  }
+
+  return false;
 }
 
 interface Props {
@@ -79,7 +118,6 @@ export default function BatchMode({
 
     let parsed: { scenes: SceneData[] };
     try {
-      // Tolerate AI output pasted with a ```json fence around it.
       const cleaned = rawText.trim().replace(/^```json\s*|^```\s*|```$/g, '');
       parsed = JSON.parse(cleaned) as { scenes: SceneData[] };
     } catch (err: unknown) {
@@ -106,11 +144,18 @@ export default function BatchMode({
 
   const startBatch = async () => {
     if (!projectHandle || pendingScenes.length === 0) return;
+
     const [tab] = await browser.tabs.query({ active: true, currentWindow: true });
     if (!tab?.id) {
       setStatusMsg(
         `First, open ${SUPPORTED_SITES.map((s) => s.name).join(' or ')} in the active tab.`
       );
+      return;
+    }
+
+    const site = detectSite(tab.url);
+    if (!site) {
+      setStatusMsg('Open a Vibes AI or Google Flow tab before starting the batch.');
       return;
     }
 
@@ -125,17 +170,21 @@ export default function BatchMode({
     }
 
     setLoading(true);
-    setStatusMsg(
-      batchType === BatchModes.Image
-        ? 'Starting image batch...'
-        : 'Loading reference image...'
-    );
+    setStatusMsg('Checking connection to the selected generation tab...');
 
     try {
       const scenes: SceneInput[] =
         batchType === BatchModes.Image
           ? buildImageScenes(pendingScenes)
           : await buildVideoScenes(projectHandle, pendingScenes);
+
+      const contentReady = await waitForContentScript(tab.id);
+      if (!contentReady) {
+        setStatusMsg(
+          'The extension cannot connect to this tab. Refresh the Vibes AI or Google Flow page, then try again.'
+        );
+        return;
+      }
 
       onBatchStart();
       await browser.runtime.sendMessage({
@@ -145,7 +194,7 @@ export default function BatchMode({
         tabId: tab.id,
         preCompletedSceneNumbers: getPreCompleted(batchScenes, pendingScenes),
         mode: batchType,
-        site: detectSite(tab.url),
+        site,
       });
       setStatusMsg('');
     } catch (err: unknown) {
@@ -155,8 +204,6 @@ export default function BatchMode({
     }
   };
 
-  // Fire-and-forget: background owns the running batch, popup just notifies
-  // and doesn't care if the message fails to land (e.g. popup closing).
   const notifyBackground = (message: object) =>
     browser.runtime.sendMessage(message).catch(() => { });
 
