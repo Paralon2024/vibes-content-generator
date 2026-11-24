@@ -70,7 +70,7 @@ export function ProjectSetupView({
               <div
                 key={s.scene_number}
                 className={`scene-cell ${completedScenes.has(s.scene_number) ? 'scene-cell--done' : ''}`}
-                title={`Escena ${pad4(s.scene_number)}`}
+                title={`Scene ${pad4(s.scene_number)}`}
               >
                 {completedScenes.has(s.scene_number) ? '✓' : '·'}
               </div>
