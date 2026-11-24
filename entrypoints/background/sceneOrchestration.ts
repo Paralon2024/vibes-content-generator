@@ -57,7 +57,7 @@ export async function runBatchSceneFrom(index: number) {
 
   log({
     sceneNumber: scene.sceneNumber,
-    step: `Enviando prompt (escena ${index + 1}/${batch.scenes.length})`,
+    step: `Sending prompt (scene ${index + 1}/${batch.scenes.length})`,
     kind: LogKinds.Info,
     level: LogLevels.Scene,
   });
@@ -83,7 +83,7 @@ export async function runBatchSceneFrom(index: number) {
 
     log({
       sceneNumber: scene.sceneNumber,
-      step: err instanceof Error ? err.message : 'No se pudo contactar la pestaña.',
+      step: err instanceof Error ? err.message : 'Could not connect to the tab.',
       kind: LogKinds.Error,
       level: LogLevels.Scene,
       cooldownMs: retryDelayMs,
@@ -111,8 +111,8 @@ export async function advanceAfterPendingWrite(sceneNumber: number) {
     ).length;
     const step =
       errorCount > 0
-        ? `Batch completo, ${errorCount} escena(s) con error`
-        : 'Batch completo, sin errores';
+        ? `Batch complete, ${errorCount} scene(s) failed`
+        : 'Batch complete, no errors';
     log({
       sceneNumber,
       step,
@@ -126,7 +126,7 @@ export async function advanceAfterPendingWrite(sceneNumber: number) {
   const nextDelayMs = batch.mode === BatchModes.Video ? 12000 : 4000;
   log({
     sceneNumber,
-    step: 'Escena lista, siguiente en breve',
+    step: 'Scene completed, next one starting shortly',
     kind: LogKinds.Success,
     level: LogLevels.Scene,
     cooldownMs: nextDelayMs,
@@ -147,7 +147,7 @@ export async function markSceneErrorAndAdvance(
   if (!batch) return;
   log({
     sceneNumber,
-    step: reason ?? 'Escena marcada como error, avanzando',
+    step: reason ?? 'Scene marked as failed, moving on',
     kind: LogKinds.Error,
     level: LogLevels.Scene,
   });
