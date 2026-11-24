@@ -12,16 +12,16 @@ export default defineContentScript({
   ],
   main() {
     browser.runtime.onMessage.addListener((message: ExtensionMessage) => {
-      // Only 2 actions matter to this content script — everything else
-      // (NativeClick, GetBatchStatus, etc.) is background.ts's business.
       switch (message.action) {
+        case Actions.PingContentScript:
+          return { ready: true, site: 'flow' };
+
         case Actions.StopBatch:
           setAborted(true);
           return;
 
         case Actions.SendPrompt: {
           setAborted(false);
-          // Fire-and-forget — outcomes travel as their own later messages.
           const { prompt, mediaType, imageBase64, imageName, sceneNumber } = message;
           if (mediaType === BatchModes.Image) {
             handleImageMode(prompt, sceneNumber);
