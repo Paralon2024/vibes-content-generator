@@ -24,19 +24,27 @@ jobs:
       - name: Install dependencies
         run: npm install
 
-      - name: Build and package Chrome extension
-        run: npm run zip
+      - name: Build Chrome extension
+        run: npm run build
 
-      - name: Verify packaged extension
+      - name: Package unpacked Chrome extension
         shell: bash
         run: |
           set -euo pipefail
-          find .output -maxdepth 1 -type f -name '*.zip' -print -quit | grep -q .
+          EXT_DIR=".output/chrome-mv3"
+          test -f "$EXT_DIR/manifest.json"
+          cd "$EXT_DIR"
+          zip -qr "$GITHUB_WORKSPACE/vibes-content-generator-chrome.zip" .
+
+      - name: Verify installable ZIP
+        run: |
+          test -s vibes-content-generator-chrome.zip
+          unzip -l vibes-content-generator-chrome.zip | grep -q 'manifest.json'
 
       - name: Upload installable extension ZIP
         uses: actions/upload-artifact@v4
         with:
           name: vibes-content-generator-chrome
-          path: .output/*.zip
+          path: vibes-content-generator-chrome.zip
           if-no-files-found: error
           retention-days: 30
