@@ -171,7 +171,7 @@ async function waitForGenerationAndDownload(
 export async function handleImageMode(prompt: string, sceneNumber: number) {
   log({
     sceneNumber,
-    step: 'Generando imagen en Google Flow',
+    step: 'Generating image in Google Flow',
     kind: LogKinds.Info,
     level: LogLevels.Mode,
   });
@@ -198,7 +198,7 @@ export async function handleVideoMode(
   if (!imageBase64 || !imageName) {
     await reportSceneFailed(
       sceneNumber,
-      'Imagen de referencia requerida para video.',
+      'A reference image is required for video generation.',
       VIDEO_SCENE_RETRY_DELAY_MS
     );
     return;
@@ -206,7 +206,7 @@ export async function handleVideoMode(
 
   log({
     sceneNumber,
-    step: 'Preparando video en Google Flow',
+    step: 'Preparing video in Google Flow',
     kind: LogKinds.Info,
     level: LogLevels.Mode,
   });
