@@ -41,7 +41,7 @@ export function HowToUseMode() {
     <div className="main how-to-use">
       <div className="welcome-section">
         <p className="welcome-text">
-          Este bot te permite automatizar la generación de imágenes y videos tanto en{' '}
+          This extension automates image and video generation on both{' '}
           <a href={SUPPORTED_SITES[0].url} target="_blank" rel="noopener noreferrer">
             {SUPPORTED_SITES[0].name}
           </a>{' '}
@@ -56,14 +56,14 @@ export function HowToUseMode() {
       <div className="steps-container">
         <div className="step-item">
           <div className="step-badge">1</div>
-          <p className="step-text">Primero debes tener todas las escenas de tu guion preparadas.</p>
+          <p className="step-text">First, prepare all the scenes in your script.</p>
         </div>
 
         <div className="step-item">
           <div className="step-badge">2</div>
           <div className="step-content">
             <p className="step-text">
-              Adapta tu guion al formato estructurado <code>script.json</code>. Si no lo tienes,
+              Convert your script to the structured <code>script.json</code>. Si no lo tienes,
               copia y usa este prompt para generarlo con IA:
             </p>
             <div className="prompt-wrapper">
@@ -73,7 +73,7 @@ export function HowToUseMode() {
               <button
                 className={`icon-copy-btn ${copied ? 'copied' : ''}`}
                 onClick={handleCopy}
-                title="Copiar prompt"
+                title="Copy prompt"
               >
                 {copied ? (
                   <svg
@@ -114,8 +114,8 @@ export function HowToUseMode() {
           <div className="step-badge">3</div>
           <div className="step-content">
             <p className="step-text">
-              Guarda el archivo en una carpeta vacía. El archivo debe llamarse{' '}
-              <strong>estrictamente</strong> <code>script.json</code>. Estructura inicial:
+              Save the file in an empty folder. The file must be named{' '}
+              <strong>exactly</strong> <code>script.json</code>. Initial folder structure:
             </p>
             <div className="folder-structure">
               📁 Mi-Proyecto-AI/
@@ -129,34 +129,34 @@ export function HowToUseMode() {
           <div className="step-badge">4</div>
           <div className="step-content">
             <p className="step-text">
-              <strong>Paso 4:</strong> Configura y genera las imágenes de tu proyecto.
+              <strong>Step 4:</strong> Set up and generate your project's images.
             </p>
 
             <details className="step-details" style={{ marginTop: '4px' }}>
-              <summary>Configuración de plataforma (Vibes AI / Google Flow)</summary>
+              <summary>Platform setup (Vibes AI / Google Flow)</summary>
               <div className="details-content">
                 <div className="platform-option vibes">
-                  <h4>🟣 Vibes AI (Gratis)</h4>
+                  <h4>🟣 Vibes AI (Free)</h4>
                   <ul>
-                    <li>📝 Nota: La plataforma puede ser inestable.</li>
+                    <li>📝 Note: The platform may be unstable.</li>
                     <li>
-                      🚀 No requiere configuración previa, solo haz clic en Generar en la extensión.
+                      🚀 No setup is required. Just click Generate in the extension.
                     </li>
                   </ul>
                 </div>
 
                 <div className="platform-option flow">
-                  <h4>🔵 Google Flow (Gratis - 0 puntos)</h4>
+                  <h4>🔵 Google Flow (Free - 0 credits)</h4>
                   <ul>
-                    <li>✅ Más estable (0 puntos).</li>
+                    <li>✅ More stable (0 credits).</li>
                     <li>
-                      ⚙️ Activa el modo <strong>Agente</strong> y selecciona <strong>x2</strong> en
+                      ⚙️ Enable <strong>Agent mode</strong> and select <strong>x2</strong> en
                       la web antes de generar:
                     </li>
                   </ul>
                   <img
                     src="/flow_image.png"
-                    alt="Configuración Imagen Flow"
+                    alt="Google Flow image settings"
                     className="guide-img"
                   />
                 </div>
@@ -165,20 +165,20 @@ export function HowToUseMode() {
 
             <div className="sub-step-info" style={{ marginTop: '8px' }}>
               <p className="step-text">
-                En la pestaña <strong>Proyecto</strong>, selecciona tu carpeta, asegúrate de estar
-                en el modo <strong>Imágenes</strong> y haz clic en <strong>Generar imágenes</strong>
+                In the <strong>Proyecto</strong>, tab, select your folder, make sure you are in
+                en el modo <strong>Images</strong> y haz clic en <strong>Generate images</strong>
                 :
               </p>
               <img
                 src="/ext_image_project.png"
-                alt="Generar imágenes en extensión"
+                alt="Generate images en extensión"
                 className="screenshot-img"
               />
             </div>
 
             <div className="sub-step-info" style={{ marginTop: '8px' }}>
               <p className="step-text">
-                El bot creará automáticamente la subcarpeta <code>images</code> y guardará las
+                The extension will automatically create the <code>images</code> y guardará las
                 imágenes:
               </p>
               <div className="folder-structure" style={{ marginTop: '4px' }}>
@@ -196,51 +196,51 @@ export function HowToUseMode() {
           <div className="step-badge">5</div>
           <div className="step-content">
             <p className="step-text">
-              <strong>Paso 5:</strong> Configura y genera los videos de tu proyecto.
+              <strong>Step 5:</strong> Set up and generate your project's videos.
             </p>
 
             <details className="step-details" style={{ marginTop: '4px' }}>
-              <summary>Configuración de plataforma (Vibes AI / Google Flow)</summary>
+              <summary>Platform setup (Vibes AI / Google Flow)</summary>
               <div className="details-content">
                 <div className="platform-option vibes">
-                  <h4>🟣 Vibes AI (Gratis)</h4>
+                  <h4>🟣 Vibes AI (Free)</h4>
                   <ul>
-                    <li>📝 Nota: La plataforma puede ser inestable.</li>
+                    <li>📝 Note: The platform may be unstable.</li>
                     <li>
-                      🚀 No requiere configuración previa, solo haz clic en Generar en la extensión.
+                      🚀 No setup is required. Just click Generate in the extension.
                     </li>
                   </ul>
                 </div>
 
                 <div className="platform-option flow">
-                  <h4>🔵 Google Flow (10 puntos por video)</h4>
+                  <h4>🔵 Google Flow (10 credits per video)</h4>
                   <ul>
-                    <li>💰 Cuesta 10 puntos por video.</li>
+                    <li>💰 Costs 10 credits per video.</li>
                     <li>
-                      ⚙️ Cambia el agente a modo <strong>Vídeo</strong> y selecciona{' '}
-                      <strong>x1</strong> en la web antes de generar:
+                      ⚙️ Switch the agent to <strong>Video</strong> and select{' '}
+                      <strong>x1</strong> on the website before generating:
                     </li>
                   </ul>
-                  <img src="/flow_video.png" alt="Configuración Video Flow" className="guide-img" />
+                  <img src="/flow_video.png" alt="Google Flow video settings" className="guide-img" />
                 </div>
               </div>
             </details>
 
             <div className="sub-step-info" style={{ marginTop: '8px' }}>
               <p className="step-text">
-                En la extensión, selecciona el sub-modo <strong>Videos</strong> y haz clic en{' '}
-                <strong>Generar videos</strong>:
+                In the extension, select the <strong>Videos</strong> y haz clic en{' '}
+                <strong>Generate videos</strong>:
               </p>
               <img
                 src="/ext_video_project.png"
-                alt="Generar videos en extensión"
+                alt="Generate videos en extensión"
                 className="screenshot-img"
               />
             </div>
 
             <div className="sub-step-info" style={{ marginTop: '8px' }}>
               <p className="step-text">
-                El bot creará la subcarpeta <code>videos</code>, completando la estructura final:
+                The extension will create the subfolder <code>videos</code>, to complete the final folder structure:
               </p>
               <div className="folder-structure" style={{ marginTop: '4px' }}>
                 📁 Mi-Proyecto-AI/
@@ -258,7 +258,7 @@ export function HowToUseMode() {
 
       <div className="channel-section">
         <p className="channel-text">
-          Encuentra más automatizaciones y desarrollo en mi canal:{' '}
+          Find more automation tools and development updates on my channel:{' '}
           <a href="https://www.youtube.com/@Hans-Acha" target="_blank" rel="noopener noreferrer">
             YouTube @Hans-Acha
           </a>
