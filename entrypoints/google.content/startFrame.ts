@@ -130,7 +130,7 @@ async function uploadWithRetries(
 
     log({
       sceneNumber,
-      step: 'Subiendo start frame',
+      step: 'Uploading start frame',
       kind: LogKinds.Info,
       level: LogLevels.Detail,
       attempt: { current: attempt, max: MAX_UPLOAD_ATTEMPTS },
@@ -150,7 +150,7 @@ async function uploadWithRetries(
 
     log({
       sceneNumber,
-      step: 'Subida falló, reintentando',
+      step: 'Upload failed, retrying',
       kind: LogKinds.Retry,
       level: LogLevels.Detail,
       attempt: { current: attempt, max: MAX_UPLOAD_ATTEMPTS },
@@ -174,19 +174,19 @@ export async function attachStartFrame(
 ): Promise<boolean> {
   if (isStartFrameAttached()) return true;
 
-  log({ sceneNumber, step: 'Adjuntando start frame', kind: LogKinds.Info, level: LogLevels.Step });
+  log({ sceneNumber, step: 'Attaching start frame', kind: LogKinds.Info, level: LogLevels.Step });
 
   const result = await uploadWithRetries(imageBase64, imageName, sceneNumber);
   if (result !== UploadResults.Success) {
     log({
       sceneNumber,
-      step: 'No se pudo adjuntar el start frame',
+      step: 'Could not attach the start frame',
       kind: LogKinds.Error,
       level: LogLevels.Step,
     });
     return false;
   }
 
-  log({ sceneNumber, step: 'Start frame subido', kind: LogKinds.Success, level: LogLevels.Step });
+  log({ sceneNumber, step: 'Start frame uploaded', kind: LogKinds.Success, level: LogLevels.Step });
   return true;
 }
