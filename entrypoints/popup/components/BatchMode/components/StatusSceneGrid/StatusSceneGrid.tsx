@@ -20,7 +20,7 @@ export function StatusSceneGrid({ sceneNumbers, sceneStatuses }: StatusSceneGrid
         <div
           key={n}
           className={`scene-cell scene-cell--${sceneStatuses[n] ?? 'pending'}`}
-          title={`Escena ${pad4(n)}`}
+          title={`Scene ${pad4(n)}`}
         >
           {SCENE_ICONS[sceneStatuses[n]] ?? '·'}
         </div>
