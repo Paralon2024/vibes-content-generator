@@ -20,7 +20,7 @@ export async function handleImageMode(prompt: string, sceneNumber: number) {
   if (!switched) {
     await reportSceneFailed(
       sceneNumber,
-      'No se pudo activar el modo imagen.',
+      'Could not switch to image mode.',
       IMAGE_SCENE_RETRY_DELAY_MS
     );
     return;
@@ -58,7 +58,7 @@ export async function handleVideoMode(
   if (!switched) {
     await reportSceneFailed(
       sceneNumber,
-      'No se pudo activar el modo video.',
+      'Could not switch to video mode.',
       VIDEO_SCENE_RETRY_DELAY_MS
     );
     return;
@@ -68,7 +68,7 @@ export async function handleVideoMode(
   if (!attached) {
     await reportSceneFailed(
       sceneNumber,
-      'No se pudo adjuntar el start frame.',
+      'Could not attach the start frame.',
       VIDEO_SCENE_RETRY_DELAY_MS
     );
     return;
