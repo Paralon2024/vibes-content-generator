@@ -4,23 +4,25 @@ export default defineConfig({
   modules: ['@wxt-dev/module-react'],
   manifest: {
     name: 'AI Content Generator',
-    version: '1.0.8',
+    version: '1.0.9',
 
-    // Explicitly bind the toolbar button to the compact popup.
-    // This prevents Chrome from showing an inert toolbar action when
-    // the popup entrypoint is not inferred by the build.
+    // Keep the compact toolbar popup.
     action: {
       default_popup: 'popup.html',
     },
 
     permissions: ['activeTab', 'tabs', 'storage', 'alarms', 'debugger', 'unlimitedStorage'],
     host_permissions: [
+      // Vibes.ai root domain and subdomains.
+      'https://vibes.ai/*',
       'https://*.vibes.ai/*',
       'https://*.fbcdn.net/*',
-      'https://labs.google/*',
-      'https://*.labs.google/*',
+
+      // Google Flow and Labs root domains and subdomains.
       'https://flow.google.com/*',
       'https://*.flow.google.com/*',
+      'https://labs.google/*',
+      'https://*.labs.google/*',
       'https://flow-content.google/*',
       'https://*.flow-content.google/*',
     ],
