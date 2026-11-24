@@ -19,8 +19,8 @@ import type { AppMode, LogStatus } from './App.types';
 import './style.css';
 
 const MODE_TABS: { mode: AppMode; label: string }[] = [
-  { mode: AppModes.HowToUse, label: '¿Cómo usar?' },
-  { mode: AppModes.Project, label: 'Proyecto' },
+  { mode: AppModes.HowToUse, label: 'How to Use' },
+  { mode: AppModes.Project, label: 'Project' },
 ];
 
 export default function App() {
