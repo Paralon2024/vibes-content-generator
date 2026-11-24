@@ -45,7 +45,7 @@ export function HowToUseMode() {
           <a href={SUPPORTED_SITES[0].url} target="_blank" rel="noopener noreferrer">
             {SUPPORTED_SITES[0].name}
           </a>{' '}
-          and on{' '}
+          and{' '}
           <a href={SUPPORTED_SITES[1].url} target="_blank" rel="noopener noreferrer">
             {SUPPORTED_SITES[1].name}
           </a>
