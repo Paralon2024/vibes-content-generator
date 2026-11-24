@@ -1,6 +1,6 @@
 {
   "name": "ai-content-generator",
-  "description": "Extensión de Chrome para automatizar la generación de imágenes y videos en Vibes AI y Google Flow.",
+  "description": "Chrome extension that automates image and video generation on Vibes AI and Google Flow.",
   "private": true,
   "version": "1.0.7",
   "type": "module",
