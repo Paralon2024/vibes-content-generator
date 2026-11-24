@@ -54,7 +54,7 @@ export default function BatchMode({
       handle = await showDirectoryPicker({ mode: 'readwrite' });
     } catch (err: unknown) {
       if ((err as DOMException)?.name !== 'AbortError') {
-        setStatusMsg('No se pudo abrir el selector de carpetas.');
+        setStatusMsg('Could not open the folder picker.');
       }
       return;
     }
@@ -72,7 +72,7 @@ export default function BatchMode({
       rawText = await scriptFile.text();
     } catch {
       setStatusMsg(
-        `No se encontró "${ProjectFiles.Script}" en la carpeta. Revisa que el nombre del archivo esté bien escrito.`
+        `Could not find "${ProjectFiles.Script}" in the selected folder. Check that the file name is correct.`
       );
       return;
     }
@@ -84,7 +84,7 @@ export default function BatchMode({
       parsed = JSON.parse(cleaned) as { scenes: SceneData[] };
     } catch (err: unknown) {
       setStatusMsg(
-        `El archivo ${ProjectFiles.Script} no es un JSON válido: ${err instanceof Error ? err.message : String(err)}`
+        `The file ${ProjectFiles.Script} is not valid JSON: ${err instanceof Error ? err.message : String(err)}`
       );
       return;
     }
@@ -94,7 +94,7 @@ export default function BatchMode({
       setCompletedScenes(await readCompletedScenes(handle, batchType));
     } catch (err: unknown) {
       setStatusMsg(
-        `Error leyendo el progreso del proyecto: ${err instanceof Error ? err.message : String(err)}`
+        `Error reading project progress: ${err instanceof Error ? err.message : String(err)}`
       );
     }
   };
@@ -109,7 +109,7 @@ export default function BatchMode({
     const [tab] = await browser.tabs.query({ active: true, currentWindow: true });
     if (!tab?.id) {
       setStatusMsg(
-        `Abre ${SUPPORTED_SITES.map((s) => s.name).join(' o ')} en la pestaña activa primero.`
+        `First, open ${SUPPORTED_SITES.map((s) => s.name).join(' or ')} in the active tab.`
       );
       return;
     }
@@ -118,7 +118,7 @@ export default function BatchMode({
       const missing = await validateSceneRefImages(projectHandle, pendingScenes);
       if (missing.length > 0) {
         setStatusMsg(
-          `Faltan imágenes de referencia para escenas: ${missing.sort((a, b) => a - b).join(', ')}. Genera las imágenes primero.`
+          `Missing reference images for scenes: ${missing.sort((a, b) => a - b).join(', ')}. Generate the images first.`
         );
         return;
       }
@@ -127,8 +127,8 @@ export default function BatchMode({
     setLoading(true);
     setStatusMsg(
       batchType === BatchModes.Image
-        ? 'Iniciando batch de imágenes...'
-        : 'Cargando imagen de referencia...'
+        ? 'Starting image batch...'
+        : 'Loading reference image...'
     );
 
     try {
