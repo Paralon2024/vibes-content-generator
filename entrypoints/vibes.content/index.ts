@@ -6,10 +6,12 @@ import { handleImageMode, handleVideoMode } from './modeHandlers';
 export default defineContentScript({
   matches: ['*://*.vibes.ai/*', '*://vibes.ai/*'],
   main() {
-    browser.runtime.onMessage.addListener((message: ExtensionMessage) => {
+    browser.runtime.onMessage.addListener(
+      (message: ExtensionMessage, _sender, sendResponse) => {
       switch (message.action) {
         case Actions.PingContentScript:
-          return { ready: true, site: 'vibes' };
+            sendResponse({ ready: true, site: 'vibes' });
+            return;
 
         case Actions.StopBatch:
           setAborted(true);
@@ -29,6 +31,7 @@ export default defineContentScript({
         default:
           return;
       }
-    });
+      }
+    );
   },
 });
