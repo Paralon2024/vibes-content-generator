@@ -34,7 +34,7 @@ async function fillComposerAndSubmit(
 ): Promise<HTMLElement | null> {
   const composer = await waitFor(() => getComposer(), COMPOSER_WAIT_TIMEOUT_MS);
   if (!composer) {
-    await reportSceneFailed(sceneNumber, 'Editor de Google Flow no encontrado.', retryDelayMs);
+    await reportSceneFailed(sceneNumber, 'Google Flow editor not found.', retryDelayMs);
     return null;
   }
 
@@ -42,7 +42,7 @@ async function fillComposerAndSubmit(
   if (!filled) {
     await reportSceneFailed(
       sceneNumber,
-      'No se pudo escribir el prompt en Google Flow.',
+      'Could not enter the prompt in Google Flow.',
       retryDelayMs
     );
     return null;
@@ -54,7 +54,7 @@ async function fillComposerAndSubmit(
   if (!submitted) {
     await reportSceneFailed(
       sceneNumber,
-      'No se pudo hacer clic en el botón de enviar.',
+      'Could not click the Submit button.',
       retryDelayMs
     );
     return null;
@@ -89,7 +89,7 @@ async function waitForGenerationAndDownload(
     if (aborted) return;
 
     if (ensureReadyToSubmit && !(await ensureReadyToSubmit())) {
-      await reportSceneFailed(sceneNumber, 'No se pudo adjuntar el start frame.', retryDelayMs);
+      await reportSceneFailed(sceneNumber, 'Could not attach the start frame.', retryDelayMs);
       return;
     }
 
@@ -121,8 +121,8 @@ async function waitForGenerationAndDownload(
           sceneNumber,
           step:
             mode === BatchModes.Video
-              ? 'Video listo, descargando'
-              : `${result.urls.length} imagen(es) lista(s), descargando`,
+              ? 'Video ready, downloading'
+              : `${result.urls.length} image(s) ready, downloading`,
           kind: LogKinds.Success,
           level: LogLevels.Step,
         });
@@ -154,7 +154,7 @@ async function waitForGenerationAndDownload(
         if (attempt >= MAX_GENERATION_ATTEMPTS) {
           log({
             sceneNumber,
-            step: 'Tiempo agotado, saltando escena',
+            step: 'Timed out, skipping scene',
             kind: LogKinds.Error,
             level: LogLevels.Step,
           });
