@@ -28,10 +28,10 @@ function LogEntry({
       style={{ marginLeft: status.level * 14 }}
     >
       <div className="log-panel__row">
-        {showScene && <span className="log-panel__scene">Escena {status.sceneNumber}</span>}
+        {showScene && <span className="log-panel__scene">Scene {status.sceneNumber}</span>}
         {status.attempt && (
           <span className="log-panel__attempt">
-            Intento {status.attempt.current}/{status.attempt.max}
+            Attempt {status.attempt.current}/{status.attempt.max}
           </span>
         )}
       </div>
