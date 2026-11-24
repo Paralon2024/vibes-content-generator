@@ -17,9 +17,9 @@ export function ActiveBatchView({ batchStatus, doneCount, onStop }: ActiveBatchV
       <div className="project-header">
         <span className="project-title">{batchStatus.projectName}</span>
         <span className="project-count">
-          {batchStatus.mode === BatchModes.Image ? '🖼 Imágenes · ' : '🎬 Videos · '}
-          Escena {pad4(batchStatus.currentIndex + 1)} / {batchStatus.totalScenes} · {doneCount}{' '}
-          listas
+          {batchStatus.mode === BatchModes.Image ? '🖼 Images · ' : '🎬 Videos · '}
+          Scene {pad4(batchStatus.currentIndex + 1)} / {batchStatus.totalScenes} · {doneCount}{' '}
+          completed
         </span>
       </div>
 
@@ -41,9 +41,9 @@ export function ActiveBatchView({ batchStatus, doneCount, onStop }: ActiveBatchV
       />
 
       <button className="abort-btn" onClick={onStop} style={{ width: '100%', marginTop: '16px' }}>
-        ■ Detener batch
+        ■ Stop batch
       </button>
-      <p className="batch-note">El batch corre en background — puedes cerrar el popup.</p>
+      <p className="batch-note">The batch runs in the background — you can close this popup.</p>
     </div>
   );
 }
