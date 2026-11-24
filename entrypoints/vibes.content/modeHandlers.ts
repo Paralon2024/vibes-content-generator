@@ -14,7 +14,7 @@ import { generateWithRetries, reportSceneFailed } from './mediaPolling';
 // ── Mode handlers ─────────────────────────────────────────────────────────────
 
 export async function handleImageMode(prompt: string, sceneNumber: number) {
-  log({ sceneNumber, step: 'Generando imagen', kind: LogKinds.Info, level: LogLevels.Mode });
+  log({ sceneNumber, step: 'Generating image', kind: LogKinds.Info, level: LogLevels.Mode });
 
   const switched = await ensureMode(BatchModes.Image);
   if (!switched) {
@@ -46,13 +46,13 @@ export async function handleVideoMode(
   if (!imageBase64 || !imageName) {
     await reportSceneFailed(
       sceneNumber,
-      'Falta la imagen de referencia para el video.',
+      'A reference image is required for video generation.',
       VIDEO_SCENE_RETRY_DELAY_MS
     );
     return;
   }
 
-  log({ sceneNumber, step: 'Generando video', kind: LogKinds.Info, level: LogLevels.Mode });
+  log({ sceneNumber, step: 'Generating video', kind: LogKinds.Info, level: LogLevels.Mode });
 
   const switched = await ensureMode(BatchModes.Video);
   if (!switched) {
