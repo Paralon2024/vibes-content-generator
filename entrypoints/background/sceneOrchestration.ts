@@ -3,15 +3,10 @@ import { Alarms } from '../../lib/constants';
 import type { SceneInput, SendPromptMessage, LogUpdate } from '../../lib/types';
 import { batchStore } from './batchStore';
 
-// ── Logging ───────────────────────────────────────────────────────────────────
-
 function log(update: LogUpdate) {
   browser.runtime.sendMessage({ action: Actions.Log, ...update }).catch(() => {});
-  // Doesn't round-trip through background's own onMessage, so persist directly.
   void batchStore.pushLog(update);
 }
-
-// ── Message construction ──────────────────────────────────────────────────────
 
 function buildSendPromptMessage(scene: SceneInput): SendPromptMessage {
   if (scene.kind === BatchModes.Image) {
@@ -34,12 +29,31 @@ function buildSendPromptMessage(scene: SceneInput): SendPromptMessage {
   };
 }
 
+function wait(milliseconds: number) {
+  return new Promise((resolve) => setTimeout(resolve, milliseconds));
+}
+
+async function waitForContentScript(tabId: number): Promise<boolean> {
+  for (let attempt = 0; attempt < 6; attempt += 1) {
+    try {
+      const response = await browser.tabs.sendMessage(tabId, {
+        action: Actions.PingContentScript,
+      });
+      if (response?.ready === true) return true;
+    } catch {
+      // Retry briefly in case the tab is navigating or its content script is restarting.
+    }
+
+    if (attempt < 5) await wait(500);
+  }
+
+  return false;
+}
+
 export async function resetSceneTimeout(delayInMinutes: number) {
   await browser.alarms.clear(Alarms.SceneTimeout);
   browser.alarms.create(Alarms.SceneTimeout, { delayInMinutes });
 }
-
-// ── Scene orchestration ───────────────────────────────────────────────────────
 
 export async function runBatchSceneFrom(index: number) {
   const { batch } = batchStore;
@@ -62,36 +76,34 @@ export async function runBatchSceneFrom(index: number) {
     level: LogLevels.Scene,
   });
 
-  // Silent-hang fallback — the content script's own messages normally end
-  // the scene before this fires.
   await resetSceneTimeout(5);
 
-  // A rejection here means the message itself couldn't be delivered (tab
-  // closed) — real outcomes arrive later via their own messages.
   try {
+    const contentReady = await waitForContentScript(batch.tabId);
+    if (!contentReady) {
+      throw new Error(
+        'The content script disconnected. Refresh the generation page and restart the batch.'
+      );
+    }
+
     await browser.tabs.sendMessage(batch.tabId, buildSendPromptMessage(scene));
   } catch (err) {
     await browser.alarms.clear(Alarms.SceneTimeout);
-    if (!batchStore.batch) return;
-
-    // Video needs more breathing room before the next scene (2 API calls).
-    const retryDelayMs = batch.mode === BatchModes.Video ? 12000 : 4500;
-    const nextIdx = index + 1;
+    if (!batchStore.batch?.active) return;
 
     await batchStore.setSceneStatus(scene.sceneNumber, SceneStatuses.Error);
-    batchStore.broadcastStatus();
+    await batchStore.stop();
 
     log({
       sceneNumber: scene.sceneNumber,
-      step: err instanceof Error ? err.message : 'Could not connect to the tab.',
+      step: err instanceof Error
+        ? err.message
+        : 'Could not connect to the generation tab. Refresh the page and restart the batch.',
       kind: LogKinds.Error,
       level: LogLevels.Scene,
-      cooldownMs: retryDelayMs,
     });
 
-    setTimeout(() => {
-      if (batchStore.batch?.active) runBatchSceneFrom(nextIdx);
-    }, retryDelayMs);
+    batchStore.broadcastStatus();
   }
 }
 
@@ -136,8 +148,6 @@ export async function advanceAfterPendingWrite(sceneNumber: number) {
   }, nextDelayMs);
 }
 
-// `reason`/`retryAfterMs` come from SceneFailed; the SceneTimeout alarm
-// calls this with neither, falling back to the generic text/delay.
 export async function markSceneErrorAndAdvance(
   sceneNumber: number,
   reason?: string,
