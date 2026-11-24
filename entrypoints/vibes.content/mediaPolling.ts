@@ -188,7 +188,7 @@ export async function generateWithRetries(
     if (attempt > 1) {
       log({
         sceneNumber,
-        step: 'Reintentando generación',
+        step: 'Retrying generation',
         kind: LogKinds.Retry,
         level: LogLevels.Step,
         attempt: { current: attempt, max: MAX_GENERATION_ATTEMPTS },
@@ -200,13 +200,13 @@ export async function generateWithRetries(
 
     const attempted = await generateAttempt();
     if (!attempted) {
-      await reportSceneFailed(sceneNumber, 'Botón Generate no disponible.', retryAfterMs);
+      await reportSceneFailed(sceneNumber, 'Generate button is not available.', retryAfterMs);
       return;
     }
 
     log({
       sceneNumber,
-      step: 'Esperando generación',
+      step: 'Waiting for generation',
       kind: LogKinds.Info,
       level: LogLevels.Step,
       attempt: { current: attempt, max: MAX_GENERATION_ATTEMPTS },
@@ -238,13 +238,13 @@ export async function generateWithRetries(
         if (attempt >= MAX_GENERATION_ATTEMPTS) {
           log({
             sceneNumber,
-            step: 'Generación falló tras todos los intentos',
+            step: 'Generation failed after all attempts',
             kind: LogKinds.Error,
             level: LogLevels.Step,
           });
           await reportSceneFailed(
             sceneNumber,
-            'Generación falló tras todos los intentos.',
+            'Generation failed after all attempts.',
             retryAfterMs
           );
           return;
