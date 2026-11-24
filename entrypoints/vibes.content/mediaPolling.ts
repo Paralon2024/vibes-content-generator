@@ -222,7 +222,7 @@ export async function generateWithRetries(
       case BatchResults.Success:
         log({
           sceneNumber,
-          step: `${result.urls.length} archivo(s) listo(s), descargando`,
+          step: `${result.urls.length} file(s) ready, downloading`,
           kind: LogKinds.Success,
           level: LogLevels.Step,
         });
