@@ -1,25 +1,25 @@
 import { sleep, nativeClick, findButtonByTextSubstring } from './domUtils';
 
-// Intenta cambiar la interfaz de Google Flow a modo "Video" si está en "Image"
+// Try to switch the Google Flow interface to "Video" mode if it is in "Image" mode
 export async function switchToVideoMode(): Promise<boolean> {
-  // Busca el botón de configuración que suele decir "Video | x1" o "Image"
+  // Find the settings button, which usually says "Video | x1" or "Image"
   const settingsBtn =
     findButtonByTextSubstring('Video | x1') ||
     findButtonByTextSubstring('Video') ||
     findButtonByTextSubstring('Image');
 
   if (!settingsBtn) return false;
-  if (settingsBtn.textContent?.toLowerCase().includes('video')) return true; // Ya está en modo video
+  if (settingsBtn.textContent?.toLowerCase().includes('video')) return true; // Already in video mode
 
   await nativeClick(settingsBtn);
   await sleep(600);
 
-  // En el popup que se abre, buscar la pestaña/botón que dice "Video" exactamente
+  // In the popup that opens, find the tab/button whose exact label is "Video"
   const videoTab = findButtonByTextSubstring('Video', true);
   if (videoTab) {
     await nativeClick(videoTab);
     await sleep(600);
-    // Click fuera para cerrar el menú si se queda abierto
+    // Click outside to close the menu if it remains open
     document.body.click();
     return true;
   }
