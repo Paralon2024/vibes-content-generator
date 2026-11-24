@@ -4,7 +4,7 @@ export default defineConfig({
   modules: ['@wxt-dev/module-react'],
   manifest: {
     name: 'AI Content Generator',
-    version: '1.0.9',
+    version: '1.0.10',
 
     // Keep the compact toolbar popup.
     action: {
