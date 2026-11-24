@@ -181,9 +181,9 @@ export async function handleImageMode(prompt: string, sceneNumber: number) {
     sceneNumber,
     BatchModes.Image,
     IMAGE_SCENE_RETRY_DELAY_MS,
-    'Esperando imagen',
+    'Waiting for image',
     IMAGE_MEDIA_POLL_MAX_ATTEMPTS * MEDIA_POLL_INTERVAL_MS,
-    'Tiempo agotado esperando la imagen.'
+    'Timed out while waiting for the image.'
   );
 }
 
@@ -216,9 +216,9 @@ export async function handleVideoMode(
     sceneNumber,
     BatchModes.Video,
     VIDEO_SCENE_RETRY_DELAY_MS,
-    'Esperando video (puede tardar varios minutos)',
+    'Waiting for video (this may take several minutes)',
     VIDEO_MEDIA_POLL_MAX_ATTEMPTS * MEDIA_POLL_INTERVAL_MS,
-    'Tiempo agotado esperando el video.',
+    'Timed out while waiting for the video.',
     3000,
     () => attachStartFrame(imageBase64, imageName, sceneNumber)
   );
