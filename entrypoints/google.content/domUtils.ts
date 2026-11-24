@@ -50,7 +50,7 @@ export async function nativeType(text: string): Promise<void> {
   await sleep(100);
 }
 
-// Utilidad para convertir base64 a File real (necesario para inyectarlo en DataTransfer)
+// Utility to convert base64 into a real File (required to inject it into DataTransfer).
 export async function base64ToFile(base64: string, filename: string): Promise<File> {
   const res = await fetch(base64);
   const blob = await res.blob();
