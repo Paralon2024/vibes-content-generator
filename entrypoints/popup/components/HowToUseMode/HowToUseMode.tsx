@@ -118,7 +118,7 @@ export function HowToUseMode() {
               <strong>exactly</strong> <code>script.json</code>. Initial folder structure:
             </p>
             <div className="folder-structure">
-              📁 Mi-Proyecto-AI/
+              📁 My-AI-Project/
               <br />
               └── 📄 script.json
             </div>
@@ -151,7 +151,7 @@ export function HowToUseMode() {
                     <li>✅ More stable (0 credits).</li>
                     <li>
                       ⚙️ Enable <strong>Agent mode</strong> and select <strong>x2</strong> en
-                      la web antes de generar:
+                      on the website before generating:
                     </li>
                   </ul>
                   <img
@@ -165,13 +165,13 @@ export function HowToUseMode() {
 
             <div className="sub-step-info" style={{ marginTop: '8px' }}>
               <p className="step-text">
-                In the <strong>Proyecto</strong>, tab, select your folder, make sure you are in
+                In the <strong>Project</strong>, tab, select your folder, make sure you are in
                 en el modo <strong>Images</strong> y haz clic en <strong>Generate images</strong>
                 :
               </p>
               <img
                 src="/ext_image_project.png"
-                alt="Generate images en extensión"
+                alt="Generate images in the extension"
                 className="screenshot-img"
               />
             </div>
@@ -182,7 +182,7 @@ export function HowToUseMode() {
                 imágenes:
               </p>
               <div className="folder-structure" style={{ marginTop: '4px' }}>
-                📁 Mi-Proyecto-AI/
+                📁 My-AI-Project/
                 <br />
                 ├── 📁 images/
                 <br />
@@ -228,12 +228,12 @@ export function HowToUseMode() {
 
             <div className="sub-step-info" style={{ marginTop: '8px' }}>
               <p className="step-text">
-                In the extension, select the <strong>Videos</strong> y haz clic en{' '}
+                In the extension, select <strong>Videos</strong> mode and click{' '}
                 <strong>Generate videos</strong>:
               </p>
               <img
                 src="/ext_video_project.png"
-                alt="Generate videos en extensión"
+                alt="Generate videos in the extension"
                 className="screenshot-img"
               />
             </div>
@@ -243,7 +243,7 @@ export function HowToUseMode() {
                 The extension will create the subfolder <code>videos</code>, to complete the final folder structure:
               </p>
               <div className="folder-structure" style={{ marginTop: '4px' }}>
-                📁 Mi-Proyecto-AI/
+                📁 My-AI-Project/
                 <br />
                 ├── 📁 images/
                 <br />
