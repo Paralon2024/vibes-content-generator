@@ -166,7 +166,7 @@ export function HowToUseMode() {
             <div className="sub-step-info" style={{ marginTop: '8px' }}>
               <p className="step-text">
                 In the <strong>Project</strong>, tab, select your folder, make sure you are in
-                en el modo <strong>Images</strong> y haz clic en <strong>Generate images</strong>
+                <strong>Images</strong> mode, then click <strong>Generate images</strong>
                 :
               </p>
               <img
@@ -178,8 +178,8 @@ export function HowToUseMode() {
 
             <div className="sub-step-info" style={{ marginTop: '8px' }}>
               <p className="step-text">
-                The extension will automatically create the <code>images</code> y guardará las
-                imágenes:
+                The extension will automatically create the <code>images</code> subfolder and save the
+                images:
               </p>
               <div className="folder-structure" style={{ marginTop: '4px' }}>
                 📁 My-AI-Project/
