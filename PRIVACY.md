@@ -1,24 +1,24 @@
-# Política de Privacidad de AI Content Generator
+# AI Content Generator Privacy Policy
 
-Última actualización: 11 de agosto de 2026
+Last updated: August 11, 2026
 
-Esta Política de Privacidad describe cómo **AI Content Generator** ("la Extensión") trata la información de los usuarios.
+This Privacy Policy describes how **AI Content Generator** (the "Extension") handles user information.
 
-## 1. Recopilación de Información
-La Extensión no recopila, almacena, comparte ni transmite ninguna información de identificación personal, historial de navegación ni datos sensibles de los usuarios a servidores externos.
+## 1. Information Collection
+The Extension does not collect, store, share, or transmit any personally identifiable information, browsing history, or sensitive user data to external servers.
 
-## 2. Procesamiento Local de Datos
-Todo el procesamiento de datos, incluyendo la lectura del archivo de configuración `script.json` y la automatización de la interfaz en los sitios web de Vibes AI y Google Flow, se realiza de manera 100% local en el navegador del usuario. Las imágenes y videos generados se descargan directamente al disco local del usuario a través del sistema de descargas del navegador.
+## 2. Local Data Processing
+All data processing, including reading the `script.json` configuration file and automating the user interface on the Vibes AI and Google Flow websites, takes place entirely locally in the user's browser. Generated images and videos are downloaded directly to the user's local disk through the browser's download system.
 
-## 3. Permisos Utilizados
-La extensión requiere los siguientes permisos únicamente para su funcionamiento lógico local:
-- `activeTab` y `tabs`: Para inyectar el script de automatización solo cuando el usuario lo active en la pestaña correspondiente.
-- `storage` y `unlimitedStorage`: Para recordar el estado del progreso y configuraciones del usuario localmente.
-- `alarms`: Para gestionar pausas de reintento entre solicitudes.
-- `debugger`: Para simular interacciones de forma controlada localmente.
+## 3. Permissions Used
+The Extension requires the following permissions solely for its local functionality:
+- `activeTab` and `tabs`: To inject the automation script only when the user activates it in the relevant tab.
+- `storage` and `unlimitedStorage`: To remember progress and user settings locally.
+- `alarms`: To manage retry delays between requests.
+- `debugger`: To simulate interactions in a controlled, local manner.
 
-## 4. Cambios en esta Política
-Nos reservamos el derecho de actualizar esta política de privacidad en cualquier momento. Cualquier cambio será publicado en este mismo documento.
+## 4. Changes to This Policy
+We reserve the right to update this Privacy Policy at any time. Any changes will be published in this document.
 
-## 5. Contacto
-Si tienes alguna duda sobre esta política, puedes contactarnos a través de nuestro repositorio oficial de GitHub.
+## 5. Contact
+If you have any questions about this policy, you can contact us through our official GitHub repository.
