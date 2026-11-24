@@ -12,9 +12,9 @@ export const IMAGE_MEDIA_POLL_MAX_ATTEMPTS = 80;
 // Video takes longer — up to 6 minutes (240 * 1.5s).
 export const VIDEO_MEDIA_POLL_MAX_ATTEMPTS = 240;
 export const MAX_GENERATION_ATTEMPTS = 4;
-// Google Flow genera entre 1 y 4 variantes por prompt, y a veces llegan en
-// tandas (de a 2) en vez de todas de golpe. No hay forma de saber de antemano
-// cuántas serán, así que 4 es solo el techo para cortar la espera si ya se llenó.
+// Google Flow generates between 1 and 4 variants per prompt, and they sometimes
+// arrive in batches (two at a time) instead of all at once. There is no way to know
+// in advance how many there will be, so 4 is the cap used to stop waiting once full.
 export const MAX_MEDIA_PER_BATCH = 4;
 
 // How long background.ts should wait before moving to the next scene after
